@@ -1,5 +1,5 @@
 FROM mitchty/alpine-ghc:latest
-MAINTAINER Dan Kubb <dkubb@fastmail.com>
+MAINTAINER Leonti Bielski <prishelec@gmail.com>
 
 VOLUME /src
 WORKDIR /src
