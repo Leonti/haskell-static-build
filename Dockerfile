@@ -9,4 +9,3 @@ RUN ["apk", "add", "--update-cache", "alpine-sdk"]
 COPY ["build.sh", "/usr/local/sbin/"]
 
 ENTRYPOINT ["/usr/local/sbin/build.sh"]
-CMD ["--help"]

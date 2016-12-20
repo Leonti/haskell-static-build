@@ -3,7 +3,7 @@
 set -feuo pipefail
 IFS=$'\n\t'
 
-if [ $# -eq 0 ] || [ "$1" == '--help' ] || [ "$1" == '-h' ]; then
+if [ $# -eq 1 ] && ([ "$1" == '--help' ] || [ "$1" == '-h' ]); then
   echo "Example:" \
        "docker run" \
        "-v \"\$(pwd):/src\"" \
@@ -14,8 +14,8 @@ fi
 ghc_options=${ghc_options:--static -optl-static -optl-pthread}
 
 echo "Building static binary"
-stack setup "$(ghc --numeric-version)" --skip-ghc-check
-stack build --ghc-options "$ghc_options" -- .
+stack setup --allow-different-user "$(ghc --numeric-version)" --skip-ghc-check
+stack build --allow-different-user --ghc-options "$ghc_options" -- .
 
 # Strip all statically linked executables
 find "$(stack path --dist-dir)/build" \
