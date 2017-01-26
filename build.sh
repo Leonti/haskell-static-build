@@ -11,11 +11,9 @@ if [ $# -eq 1 ] && ([ "$1" == '--help' ] || [ "$1" == '-h' ]); then
   exit 1
 fi
 
-ghc_options=${ghc_options:--static -optl-static -optl-pthread}
-
 echo "Building static binary"
 stack setup --allow-different-user "$(ghc --numeric-version)" --skip-ghc-check
-stack build --allow-different-user --ghc-options "$ghc_options" -- .
+stack build --allow-different-user --ghc-options "-optl-static -fPIC -optc-Os" -- .
 
 # Strip all statically linked executables
 find "$(stack path --dist-dir)/build" \
