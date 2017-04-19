@@ -8,7 +8,7 @@ RUN cp crtbeginS.o crtbeginT.o
 VOLUME /src
 WORKDIR /src
 
-RUN ["apk", "add", "--update-cache", "alpine-sdk"]
+RUN ["apk", "add", "--update-cache", "alpine-sdk", "zlib-dev"]
 
 COPY ["build.sh", "/usr/local/sbin/"]
 
