@@ -1,7 +1,8 @@
-FROM mitchty/alpine-ghc:latest
+FROM mitchty/alpine-ghc:8.0.2
 MAINTAINER Leonti Bielski <prishelec@gmail.com>
 
 WORKDIR /usr/lib/gcc/x86_64-alpine-linux-musl/5.3.0/
+RUN ls
 RUN cp crtbeginT.o crtbeginT.o.orig
 RUN cp crtbeginS.o crtbeginT.o
 
