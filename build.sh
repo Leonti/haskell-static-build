@@ -1,24 +1,11 @@
 #!/usr/bin/env bash
+set -e
 
-set -feuo pipefail
-IFS=$'\n\t'
+version=$(date +"%y.%m.%d.%H.%M")
 
-if [ $# -eq 1 ] && ([ "$1" == '--help' ] || [ "$1" == '-h' ]); then
-  echo "Example:" \
-       "docker run" \
-       "-v \"\$(pwd):/src\"" \
-       "leonti/haskell-static-build"
-  exit 1
-fi
+docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
 
-echo "Building static binary"
-stack setup --allow-different-user "$(ghc --numeric-version)" --skip-ghc-check
-stack build --allow-different-user --ghc-options "-optl-static -fPIC -optc-Os" -- .
+sudo docker build -t leonti/haskell-static-build:$version .
+sudo docker push leonti/haskell-static-build:$version
 
-# Strip all statically linked executables
-find "$(stack path --dist-dir)/build" \
-  -type f \
-  -perm -u=x,g=x,o=x \
-  -exec strip --strip-all --enable-deterministic-archives --preserve-dates {} +
-
-#ln -snf -- "$(stack path --dist-dir)/build"
+echo $version" is built"

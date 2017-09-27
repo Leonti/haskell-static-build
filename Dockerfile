@@ -1,4 +1,4 @@
-FROM mitchty/alpine-ghc:latest
+FROM mitchty/alpine-ghc:8.0.2
 MAINTAINER Leonti Bielski <prishelec@gmail.com>
 
 WORKDIR /usr/lib/gcc/x86_64-alpine-linux-musl/5.3.0/
@@ -10,6 +10,6 @@ WORKDIR /src
 
 RUN ["apk", "add", "--update-cache", "alpine-sdk", "zlib-dev"]
 
-COPY ["build.sh", "/usr/local/sbin/"]
+COPY ["build-binary.sh", "/usr/local/sbin/"]
 
-ENTRYPOINT ["/usr/local/sbin/build.sh"]
+ENTRYPOINT ["/usr/local/sbin/build-binary.sh"]
