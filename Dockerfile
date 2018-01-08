@@ -1,5 +1,4 @@
-FROM mitchty/alpine-ghc:next
-# next is 8.0.1 at the moment
+FROM mitchty/alpine-ghc:8.0.2
 MAINTAINER Leonti Bielski <prishelec@gmail.com>
 
 WORKDIR /usr/lib/gcc/x86_64-alpine-linux-musl/5.3.0/
