@@ -10,6 +10,8 @@ WORKDIR /src
 
 RUN ["apk", "add", "--update-cache", "alpine-sdk", "zlib-dev", "xz"]
 
+RUN ["stack", "upgrade"]
+
 COPY ["build-binary.sh", "/usr/local/sbin/"]
 
 ENTRYPOINT ["/usr/local/sbin/build-binary.sh"]
