@@ -1,16 +1,14 @@
-FROM mitchty/alpine-ghc:8.0.2
+FROM haskell:8.2.1
 MAINTAINER Leonti Bielski <prishelec@gmail.com>
-
-WORKDIR /usr/lib/gcc/x86_64-alpine-linux-musl/6.2.1/
-RUN cp crtbeginT.o crtbeginT.o.orig
-RUN cp crtbeginS.o crtbeginT.o
 
 VOLUME /src
 WORKDIR /src
 
-RUN ["apk", "add", "--update-cache", "alpine-sdk", "zlib-dev", "xz"]
+#RUN ["apk", "add", "--update-cache", "alpine-sdk", "zlib-dev", "xz"]
 
-#RUN ["stack", "upgrade"]
+RUN ["stack", "upgrade"]
+
+RUN apt-get update && apt-get install -y xz-utils make
 
 COPY ["build-binary.sh", "/usr/local/sbin/"]
 

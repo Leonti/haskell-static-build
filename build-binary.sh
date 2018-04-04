@@ -12,13 +12,14 @@ if [ $# -eq 1 ] && ([ "$1" == '--help' ] || [ "$1" == '-h' ]); then
 fi
 
 echo "Building static binary"
-stack setup --allow-different-user "$(ghc --numeric-version)" --skip-ghc-check
-stack build --allow-different-user --ghc-options "-optl-static -threaded -fPIC -optc-Os" -- .
+/root/.local/bin/stack --version
+/root/.local/bin/stack setup --allow-different-user
+/root/.local/bin/stack build --allow-different-user --ghc-options "-optl-static -threaded -fPIC -optc-Os" -- .
 
 # Strip all statically linked executables
-find "$(stack path --allow-different-user --dist-dir)/build" \
+find "$(/root/.local/bin/stack path --allow-different-user --dist-dir)/build" \
   -type f \
   -perm -u=x,g=x,o=x \
   -exec strip --strip-all --enable-deterministic-archives --preserve-dates {} +
 
-#ln -snf -- "$(stack path --dist-dir)/build"
+#ln -snf -- "$(/root/.local/bin/stack path --dist-dir)/build"
