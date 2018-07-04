@@ -1,4 +1,4 @@
-FROM haskell:8.2.1
+FROM haskell:8.2.2
 MAINTAINER Leonti Bielski <prishelec@gmail.com>
 
 VOLUME /src
