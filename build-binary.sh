@@ -14,7 +14,7 @@ fi
 echo "Building static binary"
 stack --version
 stack setup --allow-different-user
-stack build --allow-different-user --ghc-options "-optl-static -threaded -fPIC -optc-Os" -- .
+stack build --allow-different-user --ghc-options "-fPIC" -- .
 
 # Strip all statically linked executables
 find "$(stack path --allow-different-user --dist-dir)/build" \
